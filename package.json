@@ -2,23 +2,67 @@
   "name": "electron-pet-app",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tomoyaX2/electron-app.git"
-  },
+  "main": "public/electron.js",
   "author": "tomoya",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tomoyaX2/electron-app/issues"
-  },
   "homepage": "https://github.com/tomoyaX2/electron-app#readme",
-  "dependencies": {
+  "devDependencies": {
     "electron": "^5.0.1",
+    "electron-builder": "^20.40.2",
+    "react-scripts": "3.0.1"
+  },
+  "scripts": {
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "build -mw",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "@rescripts/cli": "^0.0.10",
+    "@rescripts/rescript-env": "^0.0.10",
+    "concurrently": "^4.1.0",
+    "crypto": "^1.0.1",
+    "electron-is-dev": "^1.1.0",
     "electron-store": "^3.2.0",
     "eslint": "^5.16.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5",
+    "wait-on": "^3.2.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "build": {
+    "productName": "electron-react-app",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   }
 }
