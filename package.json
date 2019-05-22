@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/tomoyaX2/electron-app#readme",
   "dependencies": {
-    "babel-eslint": "^10.0.1",
     "electron": "^5.0.1",
-    "eslint": "^5.16.0"
+    "electron-store": "^3.2.0",
+    "eslint": "^5.16.0",
   }
 }
