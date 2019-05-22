@@ -29,6 +29,8 @@
     "concurrently": "^4.1.0",
     "crypto": "^1.0.1",
     "electron-is-dev": "^1.1.0",
+    "electron-packager": "^13.1.1",
+    "electron-packager-interactive": "^0.1.3",
     "electron-store": "^3.2.0",
     "eslint": "^5.16.0",
     "react": "^16.8.6",
@@ -54,8 +56,8 @@
   ],
   "build": {
     "productName": "electron-react-app",
-    "mac": {
-      "category": "public.app-category.utilities"
+    "win": {
+      "target": "NSIS"
     },
     "files": [
       "build/**/*",
