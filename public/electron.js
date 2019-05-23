@@ -1,19 +1,19 @@
-const { app, BrowserWindow, shell, ipcMain, Menu } = require('electron');
+const  { HANDLE_MINIMIZE } = require('../src/components/ElectronContants');
+const { app, BrowserWindow, ipcMain, globalShortcut, } = require('electron');
 
-const path = require('path');
 const isDev = require('electron-is-dev');
 
 let mainWindow;
 
-createWindow = () => {
+const createWindow = () => {
   mainWindow = new BrowserWindow({
     backgroundColor: '#F7F7F7',
     minWidth: 880,
-    show: false,
     titleBarStyle: 'hidden',
+    frame: false,
     webPreferences: {
-      nodeIntegration: false,
-      webSecurity: false
+      nodeIntegration: true,
+      webSecurity: true
     },
     height: 860,
     width: 1280,
@@ -31,22 +31,18 @@ createWindow = () => {
       REDUX_DEVTOOLS,
     } = require('electron-devtools-installer');
 
-    installExtension(REACT_DEVELOPER_TOOLS)
-      .then(name => {
-        console.log(`Added Extension: ${name}`);
-      })
-      .catch(err => {
-        console.log('An error occurred: ', err);
-      });
+    installExtension(REACT_DEVELOPER_TOOLS);
 
-    installExtension(REDUX_DEVTOOLS)
-      .then(name => {
-        console.log(`Added Extension: ${name}`);
-      })
-      .catch(err => {
-        console.log('An error occurred: ', err);
-      });
+    installExtension(REDUX_DEVTOOLS);
+
   }
+  ipcMain.on(HANDLE_MINIMIZE, (e, arg) => {
+    mainWindow.minimize();
+  })
+
+  globalShortcut.register('Esc', () => {
+    mainWindow.close();
+  });
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
   });
