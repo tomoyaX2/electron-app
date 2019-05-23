@@ -1,0 +1,11 @@
+Run commands:
+
+
+"yarn build"
+"yarn dist"
+
+You have to wait for the end of building process and move your .AppImage, .exe, etc... file to directory:
+
+${OS-name}-unpacked/resources/app/build
+
+Default script's path starts here and right now, i don't know, how to change it by default
