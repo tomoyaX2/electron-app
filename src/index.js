@@ -10,9 +10,7 @@ const globalStore = store();
 
 
 ReactDOM.render(
-<Provider store={globalStore}>
-  <BrowserRouter>
-  <App/>
-  </BrowserRouter>
+  <Provider store={globalStore}>
+    <App/>
   </Provider>
   , document.getElementById('root'));
