@@ -16,10 +16,14 @@
     "dev": "yarn react-scripts start",
     "build": "react-scripts build",
     "start": "concurrently \"cross-env BROWSER=none yarn react-scripts start\" \"wait-on http://localhost:3000 && electron .\"",
-    "pack": "electron-builder",
-    "dist": "npx build --x64  --linux --win --c.extraMetadata.main=build/electron.js"
+    "pack": "electron-builder --dir",
+    "dist": "npx build --x64  --linux --c.extraMetadata.main=build/electron.js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.18",
+    "@fortawesome/free-solid-svg-icons": "^5.8.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "add": "^2.0.6",
     "cross-env": "^5.2.0",
     "electron-devtools-installer": "^2.2.4",
     "electron-is-dev": "^1.1.0",
@@ -35,7 +39,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "typescript": "^3.4.5",
-    "wait-on": "^3.2.0"
+    "wait-on": "^3.2.0",
+    "yarn": "^1.16.0"
   },
   "eslintConfig": {
     "extends": "react-app"

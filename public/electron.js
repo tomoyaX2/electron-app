@@ -1,16 +1,17 @@
-const  { HANDLE_MINIMIZE } = require('../src/components/ElectronContants');
-const { app, BrowserWindow, ipcMain, globalShortcut, } = require('electron');
+
+const { app, BrowserWindow, ipcMain, } = require('electron');
 
 const isDev = require('electron-is-dev');
 
 let mainWindow;
 
 const createWindow = () => {
+  let windowFullScreenSizeStatus = false;
+
   mainWindow = new BrowserWindow({
     backgroundColor: '#F7F7F7',
-    minWidth: 880,
     titleBarStyle: 'hidden',
-    frame: false,
+    frame: true,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: true
@@ -24,6 +25,7 @@ const createWindow = () => {
       ? 'http://localhost:3000'
       : `file:///${__dirname}/index.html`
   );
+
   if (isDev) {
     const {
       default: installExtension,
@@ -36,13 +38,20 @@ const createWindow = () => {
     installExtension(REDUX_DEVTOOLS);
 
   }
-  ipcMain.on(HANDLE_MINIMIZE, (e, arg) => {
-    mainWindow.minimize();
-  })
+  mainWindow.setMenuBarVisibility(false)
 
-  globalShortcut.register('Esc', () => {
-    mainWindow.close();
+  ipcMain.on('handle-minimize', () =>
+    mainWindow.minimize()
+  );
+  ipcMain.on('handle-close-window', () =>
+  mainWindow.close());
+
+  ipcMain.on('handle-change-screen-size', (e, windowStatus) => {
+    windowFullScreenSizeStatus = windowFullScreenSizeStatus !== windowStatus;
+    windowFullScreenSizeStatus  ? mainWindow.maximize() : mainWindow.unmaximize();
   });
+
+
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
   });
